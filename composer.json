@@ -23,6 +23,11 @@
     "issues": "https://github.com/roots/bedrock/issues",
     "forum": "https://discourse.roots.io/category/bedrock"
   },
+  "autoload": {
+    "psr-4": {
+      "Events\\": "web/app/plugins/events/includes"
+    }
+  },
   "repositories": [
     {
       "type": "composer",
