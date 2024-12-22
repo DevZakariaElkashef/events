@@ -13,10 +13,9 @@ use Events\EventsPlugin;
 
 
 // prevent client users
-if (!defined('ABSPATH')) die('Direct script access disallowed.');
+if (!defined('ABSPATH'))
+    die('Direct script access disallowed.');
 
 
 // Initialize the plugin on the `plugins_loaded` hook
-new EventsPlugin();
-
-
+$plugin = new EventsPlugin();
