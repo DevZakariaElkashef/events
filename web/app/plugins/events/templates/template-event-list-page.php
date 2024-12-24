@@ -37,7 +37,7 @@ $search_url = $event_list->add_query_arg_to_url($current_url, 'search', $search_
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event List</title>
-    <link rel="stylesheet" href="<?= plugin_dir_url(__FILE__) . '../assets/event-list.css' ?>">
+    
 </head>
 
 <body>
@@ -101,11 +101,8 @@ $search_url = $event_list->add_query_arg_to_url($current_url, 'search', $search_
                 <?php endif; ?>
             </div>
 
-
         </div>
     </div>
-
-    <script src="<?= plugin_dir_url(__FILE__) . '../assets/event-list.js' ?>"></script>
 </body>
 
 </html>
