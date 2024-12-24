@@ -2,20 +2,20 @@
 
 namespace Events;
 
-use Events\Admin\EventAdminPage;
-use Events\Database\DatabaseFactory;
+use Events\Admin\Admin;
+use Events\Admin\EventPermissions;
 use Events\Database\DatabaseManager;
 use Events\Frontend\EventFrontPages;
-use Events\Frontend\RedirectTemplate;
+use Events\Frontend\Frontend;
 
 class EventsPlugin
 {
     public function __construct()
     {
-        // create tables
+        // active plugin config
         add_action('activate_events/events.php', [$this, 'activate']);
 
-        // rollback
+        // disactive plugin config
         add_action('deactivate_events/events.php', [$this, 'deactivate']);
 
         // Add setting page in the admin - frontend list page 
@@ -27,6 +27,7 @@ class EventsPlugin
     public function activate()
     {
         DatabaseManager::runMigrations();
+        EventPermissions::create();
         EventFrontPages::create_event_list_page(); // add frontend templates
         flush_rewrite_rules();
 
@@ -35,14 +36,14 @@ class EventsPlugin
     public function deactivate()
     {
         DatabaseManager::rollbackMigrations();
+        EventPermissions::remove();
         EventFrontPages::delete_event_list_page();
         flush_rewrite_rules();
     }
 
     public function init_plugin()
     {
-        new EventAdminPage(); // add event setting to setting menue
-        new RedirectTemplate(); // redirect to plugin template
-        // new DatabaseFactory(); // factory to fill dummy data
+        new Admin(); // all admin config, pages, ...
+        new Frontend(); // all frontend pages, config, ...
     }
 }

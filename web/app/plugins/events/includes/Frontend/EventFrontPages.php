@@ -23,7 +23,11 @@ class EventFrontPages
                 'post_author' => get_current_user_id(),
             );
 
-            wp_insert_post($page_data);
+            $new_page = wp_insert_post($page_data);
+
+            if ($new_page) {
+                update_post_meta($new_page, '_wp_page_template', 'templates/template-event-list-page.php');
+            }
         }
     }
 
